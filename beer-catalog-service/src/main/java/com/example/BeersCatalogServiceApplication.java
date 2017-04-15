@@ -1,5 +1,13 @@
 package com.example;
 
+
+import java.security.Principal;
+import java.util.stream.Stream;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,11 +18,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.security.Principal;
-import java.util.stream.Stream;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -25,35 +32,21 @@ public class BeersCatalogServiceApplication {
     }
 }
 
+@Data
+@NoArgsConstructor  // pourquoi JPA pourquoi??
+@AllArgsConstructor
+@ToString
 @Entity
 class Beer {
 
-    private String name;
     @GeneratedValue
     @Id
     private Long id;
 
-    public Beer() {
-    }
-
+    private String name;
+    
     public Beer(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    	this.name = name;
     }
 }
 
